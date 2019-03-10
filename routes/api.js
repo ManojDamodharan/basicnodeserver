@@ -17,8 +17,8 @@ const transporter = nodemailer.createTransport({ //This defines how the Data is 
 const mailSenderName = 'Damodharan S';
 
 const mongoose = require('mongoose');
-//const db = 'mongodb://sdamodharan:DAMOat10@ds223605.mlab.com:23605/events_db';
-const db = 'mongodb://localhost:27017/events_db';
+const db = 'mongodb://sdamodharan:DAMOat10@ds223605.mlab.com:23605/events_db';
+//const db = 'mongodb://localhost:27017/events_db';
 mongoose.connect(db, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true }, err => {
     if(err){
         console.error("Error in connecting to the 'events_db'"+ err);
@@ -32,9 +32,9 @@ function verifyEmailExistence(req, res, next){
     User.findOne({ email: req.body.email }, (err, user) => {        
         if(err) {
             //handle error here
-           console.error('Error:'+ err);
-           return res.status(500).send(err);
-           //return next(error);
+            console.error('Error:'+ err);
+            return res.status(500).send(err);
+            //return next(error);
         }
         if(user){
             //if a user was found, that means the user's email matches the entered email
@@ -297,5 +297,6 @@ router.put('/updateprofile/:id', verifyToken, (req, res) => { //":id" is a place
         }
     );
 })
+
 
 module.exports = router;
